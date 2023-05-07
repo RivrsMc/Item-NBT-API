@@ -47,7 +47,7 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
             throw new NullPointerException("ItemStack can't be null/air/amount of 0! This is not a NBTAPI bug!");
         }
         this.directApply = directApply;
-        bukkitItem = item.clone();
+        bukkitItem = item;
         if (directApply) {
             this.originalSrcStack = item;
         }
@@ -55,6 +55,7 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
 
     @Override
     public Object getCompound() {
+
         return NBTReflectionUtil.getItemRootNBTTagCompound(ReflectionMethod.ITEMSTACK_NMSCOPY.run(null, bukkitItem));
     }
 

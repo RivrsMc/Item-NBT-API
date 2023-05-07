@@ -629,8 +629,7 @@ public class NBTReflectionUtil {
         if (rootnbttag == null) {
             return null;
         }
-        if (!valideCompound(comp))
-            throw new NbtApiException("The Compound wasn't able to be linked back to the root!");
+
         Object workingtag = gettoCompount(rootnbttag, comp);
         return type.run(workingtag, key);
     }
