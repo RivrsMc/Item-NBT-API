@@ -8,8 +8,8 @@ import java.lang.reflect.Field;
 public enum ReflectionField {
 
     ITEMSTACK_HANDLE(ClassWrapper.CRAFT_ITEMSTACK, MinecraftVersion.MC1_7_R4,
-            new Since(MinecraftVersion.MC1_7_R4, "handle")),
-    ;
+            new Since(MinecraftVersion.MC1_7_R4, "handle")),;
+
     private MinecraftVersion removedAfter;
     private Since targetVersion;
     private Field field;
@@ -18,8 +18,8 @@ public enum ReflectionField {
     private String fieldName = null;
     private ClassWrapper parentClassWrapper;
 
-    ReflectionField(ClassWrapper targetClass, MinecraftVersion addedSince,
-                    MinecraftVersion removedAfter, Since... fieldNames) {
+    ReflectionField(ClassWrapper targetClass, MinecraftVersion addedSince, MinecraftVersion removedAfter,
+            Since... fieldNames) {
         this.removedAfter = removedAfter;
         this.parentClassWrapper = targetClass;
         // Special Case for Modded 1.7.10
@@ -63,7 +63,7 @@ public enum ReflectionField {
                 MinecraftVersion.getLogger()
                         .warning("[NBTAPI] Unable to find the field '" + targetFieldName + "' in '"
                                 + (targetClass.getClazz() == null ? targetClass.getMojangName()
-                                : targetClass.getClazz().getSimpleName())
+                                        : targetClass.getClazz().getSimpleName())
                                 + " Enum: " + this); // NOSONAR This gets loaded
                 // before the logger is loaded
             }
@@ -71,7 +71,7 @@ public enum ReflectionField {
     }
 
     ReflectionField(ClassWrapper targetClass, MinecraftVersion addedSince, Since... methodnames) {
-        this(targetClass,  addedSince, null, methodnames);
+        this(targetClass, addedSince, null, methodnames);
     }
 
     /**
@@ -91,7 +91,6 @@ public enum ReflectionField {
     public String getFieldName() {
         return fieldName;
     }
-
 
     /**
      * @return Has this field been linked

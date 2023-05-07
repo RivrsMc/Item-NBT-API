@@ -2,6 +2,9 @@ package de.tr7zw.changeme.nbtapi;
 
 import java.util.function.BiConsumer;
 
+import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ClassWrapper;
+import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionField;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -55,8 +58,12 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
 
     @Override
     public Object getCompound() {
+        if (!(ClassWrapper.CRAFT_ITEMSTACK.getClazz().isAssignableFrom(bukkitItem.getClass()))) {
+            return NBTReflectionUtil
+                    .getItemRootNBTTagCompound(ReflectionMethod.ITEMSTACK_NMSCOPY.run(null, bukkitItem));
+        }
 
-        return NBTReflectionUtil.getItemRootNBTTagCompound(ReflectionMethod.ITEMSTACK_NMSCOPY.run(null, bukkitItem));
+        return NBTReflectionUtil.getItemRootNBTTagCompound(ReflectionField.ITEMSTACK_HANDLE.get(bukkitItem));
     }
 
     @Override
